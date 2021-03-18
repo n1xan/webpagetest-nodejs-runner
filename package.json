@@ -1,0 +1,27 @@
+{
+  "name": "webpagetest-nodejs-runner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpagetest.js",
+  "dependencies": {
+    "influx": "^5.8.0",
+    "webpagetest": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n1xan/webpagetest-nodejs-runner.git"
+  },
+  "keywords": [
+    "webpagetest"
+  ],
+  "author": "Nikolay Avramov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n1xan/webpagetest-nodejs-runner/issues"
+  },
+  "homepage": "https://github.com/n1xan/webpagetest-nodejs-runner#readme"
+}
