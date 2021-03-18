@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpagetest.js",
   "dependencies": {
+    "file-download": "^0.1.2",
     "influx": "^5.8.0",
     "webpagetest": "^0.4.0"
   },

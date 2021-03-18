@@ -60,14 +60,14 @@ let filmstripURL_end =
     let repeatView = result.data.median.repeatView;
     let firstMeaningfulPaint = repeatView.firstMeaningfulPaint,
       loadTime = firstView.loadTime,
-      TTI = repeatView["chromeUserTiming.InteractiveTime"],
+      TTI = repeatView["chromeUserTiming.InteractiveTime"] ? repeatView["chromeUserTiming.InteractiveTime"] : 0,
       bytesInDoc = firstView.bytesInDoc,
       requestsDoc = firstView.requestsDoc,
       fullyLoaded = firstView.fullyLoaded,
       visualComplete = firstView.visualComplete,
       timeToFirstByte = firstView.TTFB,
       firstContentfulPaint =
-      repeatView["chromeUserTiming.firstContentfulPaint"],
+      repeatView["chromeUserTiming.firstContentfulPaint"] ? repeatView["chromeUserTiming.firstContentfulPaint"] : 0,
       wptSpeedIndex = firstView.SpeedIndex,
       bytesHTML = firstView.breakdown.html.bytes,
       bytesJS = firstView.breakdown.js.bytes,
@@ -122,7 +122,10 @@ let filmstripURL_end =
         console.error(`Error creating Influx database!` + err);
       });
   
-  
+    if (!fs.existsSync(path)){
+        fs.mkdirSync(path);
+    }
+
     // Save test results as JSON file
     fs.writeFile(fileName, stats, err => {
       if (err) throw err;
@@ -142,29 +145,29 @@ let filmstripURL_end =
   }
 
   // Method to create video of the page loading
-  wpt.createVideo(testID, testOpts, (err, data) => {
-    console.log(err || data);
-    let videoId = data.data.videoId;
-    videoDownloadURL += videoId;
+  // wpt.createVideo(testID, testOpts, (err, data) => {
+  //   console.log(data);
+  //   let videoId = data.data.videoId;
+  //   videoDownloadURL += videoId;
 
-    setTimeout(function () {
-      download(videoDownloadURL, videoOptions, function (err) {
-        if (err) throw err;
-        console.log('########################################');
-        console.log("Video download URL for " + pageName + ": " + videoDownloadURL);
-        console.log('########################################');
-      })
-    }, 5000);
+  //   setTimeout(function () {
+  //     download(videoDownloadURL, videoOptions, function (err) {
+  //       if (err) throw err;
+  //       console.log('########################################');
+  //       console.log("Video download URL for " + pageName + ": " + videoDownloadURL);
+  //       console.log('########################################');
+  //     })
+  //   }, 5000);
 
-//     // // Download the filmstrip
-//     // var filmstripURL = filmstripURL_start + testID + filmstripURL_end;
+    // Download the filmstrip
+    var filmstripURL = filmstripURL_start + testID + filmstripURL_end;
 
-//     // download(filmstripURL, filmstripOptions, function (err) {
-//     //   if (err) throw err;
-//     //   console.log('########################################');
-//     //   console.log("Filmstrip download URL for " + pageName + ": " + filmstripURL);
-//     //   console.log('########################################');
-//     // })
+    download(filmstripURL, filmstripOptions, function (err) {
+      if (err) throw err;
+      console.log('########################################');
+      console.log("Filmstrip download URL for " + pageName + ": " + filmstripURL);
+      console.log('########################################');
+    });
 
-   });
+  //  });
 });
