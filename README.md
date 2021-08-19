@@ -11,4 +11,4 @@
 `git clone https://github.com/n1xan/webpagetest-nodejs-runner.git`
 2. `npm install`
 3. `cd webpagetest-nodejs-runner`
-4. `node webpagetest.js "https://abv.bg" abv.bg LAN false`
+4. `node webpagetest.js "https://abv.bg" abv.bg LAN Chrome`

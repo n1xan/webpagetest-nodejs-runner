@@ -58,17 +58,16 @@ let filmstripURL_end =
   
     // Metrics
     let firstView = result.data.median.firstView;
-    let repeatView = result.data.median.repeatView;
-    let firstMeaningfulPaint = repeatView.firstMeaningfulPaint,
+    // let repeatView = result.data.median.repeatView;
+    let firstMeaningfulPaint = firstView.firstMeaningfulPaint,
       loadTime = firstView.loadTime,
-      TTI = repeatView["chromeUserTiming.InteractiveTime"] ? repeatView["chromeUserTiming.InteractiveTime"] : 0,
+      TTI = firstView.TTIMeasurementEnd,
       bytesInDoc = firstView.bytesInDoc,
       requestsDoc = firstView.requestsDoc,
       fullyLoaded = firstView.fullyLoaded,
       visualComplete = firstView.visualComplete,
       timeToFirstByte = firstView.TTFB,
-      firstContentfulPaint =
-      repeatView["chromeUserTiming.firstContentfulPaint"] ? repeatView["chromeUserTiming.firstContentfulPaint"] : 0,
+      firstContentfulPaint = firstView.firstContentfulPaint,
       wptSpeedIndex = firstView.SpeedIndex,
       bytesHTML = firstView.breakdown.html.bytes,
       bytesJS = firstView.breakdown.js.bytes,
@@ -115,6 +114,7 @@ let filmstripURL_end =
             timeToFirstByte: timeToFirstByte,
             visualComplete: visualComplete,
             firstContentfulPaint: firstContentfulPaint,
+            firstMeaningfulPaint: firstMeaningfulPaint,
             speedIndex: wptSpeedIndex,
             bytesHTML: bytesHTML,
             bytesJS: bytesJS,
