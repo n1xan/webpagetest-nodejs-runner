@@ -159,21 +159,6 @@ let filmstripURL_end =
     filename: date + " - " + pageName + ".png"
   }
 
-  // Method to create video of the page loading
-  // wpt.createVideo(testID, testOpts, (err, data) => {
-  //   console.log(data);
-  //   let videoId = data.data.videoId;
-  //   videoDownloadURL += videoId;
-
-  //   setTimeout(function () {
-  //     download(videoDownloadURL, videoOptions, function (err) {
-  //       if (err) throw err;
-  //       console.log('########################################');
-  //       console.log("Video download URL for " + pageName + ": " + videoDownloadURL);
-  //       console.log('########################################');
-  //     })
-  //   }, 5000);
-
     // Download the filmstrip
     var filmstripURL = filmstripURL_start + testID + filmstripURL_end;
 
